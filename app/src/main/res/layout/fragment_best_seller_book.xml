@@ -17,7 +17,6 @@
         android:id="@+id/ranking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
         android:layout_alignParentStart="@id/book_image"
         android:fontFamily="serif"
         android:textSize="22sp" />
@@ -26,8 +25,8 @@
         android:id="@+id/book_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:srcCompat="@tools:sample/avatars"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </RelativeLayout>
 
@@ -36,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceListItem"
+        android:textColor="#000000"
         android:textStyle="bold"
         tools:text="book title" />
 
@@ -44,6 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceListItem"
+        android:textColor="#000000"
         tools:text="book author" />
 
     <TextView
@@ -55,6 +56,7 @@
         android:fontFamily="sans-serif-light"
         android:maxLines="5"
         android:textAppearance="?attr/textAppearanceListItem"
+        android:textColor="#000000"
         tools:text="book description" />
 
     <Button

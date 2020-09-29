@@ -1,5 +1,6 @@
 package com.codepath.bestsellerlistapp;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
         holder.mItem = books.get(position);
         holder.mBookTitle.setText(books.get(position).title);
         holder.mBookAuthor.setText(books.get(position).author);
+        holder.mBookDescription.setText(books.get(position).description);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +55,9 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
         });
 
         BestSellerBook bestSellerBook = books.get(position);
+
+        String ranking = String.format("%d", bestSellerBook.rank);
+        holder.mRanking.setText(ranking);
 
         Glide.with(holder.mView)
                 .load(bestSellerBook.bookImageUrl)
@@ -88,7 +93,7 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
 
         @Override
         public String toString() {
-            return mBookTitle.toString() + " '" + mBookAuthor.getText() + "'" + mBookDescription.getText();
+            return mBookTitle.toString() + " '" + mBookAuthor.getText();
         }
     }
 }
