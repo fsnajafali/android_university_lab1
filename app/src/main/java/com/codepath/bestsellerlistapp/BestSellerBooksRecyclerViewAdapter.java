@@ -1,6 +1,9 @@
 package com.codepath.bestsellerlistapp;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +23,14 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  */
 public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<BestSellerBooksRecyclerViewAdapter.BookViewHolder> {
-
+    Context mContext;
     private final List<BestSellerBook> books;
     private final OnListFragmentInteractionListener mListener;
 
-    public BestSellerBooksRecyclerViewAdapter(List<BestSellerBook> items, OnListFragmentInteractionListener listener) {
+    public BestSellerBooksRecyclerViewAdapter(Context context, List<BestSellerBook> items, OnListFragmentInteractionListener listener) {
         books = items;
         mListener = listener;
+        mContext = context;
     }
 
     @Override
@@ -54,10 +58,21 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
             }
         });
 
-        BestSellerBook bestSellerBook = books.get(position);
+        final BestSellerBook bestSellerBook = books.get(position);
 
-        String ranking = String.format("%d", bestSellerBook.rank);
+        @SuppressLint("DefaultLocale") String ranking = String.format("%d", bestSellerBook.rank);
         holder.mRanking.setText(ranking);
+
+        holder.mBuyButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(bestSellerBook.amazonUrl));
+                mContext.startActivity(i);
+            }
+        });
 
         Glide.with(holder.mView)
                 .load(bestSellerBook.bookImageUrl)
@@ -80,7 +95,8 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
         public final Button mBuyButton;
         public BestSellerBook mItem;
 
-        public BookViewHolder(View view) {
+        public BookViewHolder(View view)
+        {
             super(view);
             mView = view;
             mBookTitle = (TextView) view.findViewById(R.id.book_title);

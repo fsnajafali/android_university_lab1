@@ -61,8 +61,10 @@ public class BestSellerBooksFragment extends Fragment implements OnListFragmentI
         nyTimesApiClient.getBestSellersList(new CallbackResponse<List<BestSellerBook>>() {
             @Override
             public void onSuccess(List<BestSellerBook> models) {
+                BestSellerBooksRecyclerViewAdapter bestSellerBooksAdapter = new BestSellerBooksRecyclerViewAdapter(getContext(), models, BestSellerBooksFragment.this);
+
                 progressBar.hide();
-                recyclerView.setAdapter(new BestSellerBooksRecyclerViewAdapter(models, BestSellerBooksFragment.this));
+                recyclerView.setAdapter(bestSellerBooksAdapter);
                 Log.d("BestSellerBooksFragment", "response successful");
             }
 
